@@ -1,0 +1,16 @@
+A criação de todo projeto foi feita a partir dos seguintes tutoriais:
+https://towardsdatascience.com/running-mysql-databases-on-aws-ec2-a-tutorial-for-beginners-4301faa0c247
+https://stackoverflow.com/questions/33470753/create-mysql-database-and-user-in-bash-script
+https://stackoverflow.com/questions/4606919/in-python-try-until-no-error
+https://stackoverflow.com/questions/4870253/sed-replace-single-double-quoted-text
+https://stackoverflow.com/questions/19101243/error-1130-hy000-host-is-not-allowed-to-connect-to-this-mysql-server
+https://stackoverflow.com/questions/50177216/how-to-grant-all-privileges-to-root-user-in-mysql-8-0
+https://serverfault.com/questions/415334/django-syncdb-cant-connect-to-mysql-on-seperate-ec2-instance
+https://askubuntu.com/questions/583415/import-error-no-module-named-mysqldb/1048285#1048285
+https://stackoverflow.com/questions/40759565/django-unable-to-connect-to-mysql-server
+https://stackoverflow.com/questions/19054081/ec2-waiting-until-a-new-instance-is-in-running-state/38925075
+https://stackoverflow.com/questions/26175050/python-boto-ec2-how-do-i-wait-till-an-image-is-created-or-failed
+https://www.kite.com/python/answers/how-to-ssh-using-paramiko-in-python
+https://stackoverflow.com/questions/52461244/how-to-create-and-attach-a-elb-properly-in-boto3
+https://stackoverflow.com/questions/3961007/passing-an-array-list-into-a-python-function
+https://docs.djangoproject.com/en/3.2/
