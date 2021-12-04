@@ -1,6 +1,6 @@
 import boto3, boto3.session
 
-from cred import SENHA
+from cred import SENHA, KEY_LOCAL
 import deletions as delet
 import creations as creat
 import check
@@ -8,14 +8,12 @@ import check
 
 # Variáveis fixas
 UBUNTU_20_OHIO = 'ami-0629230e074c580f2' # Pesquisar um jeito!!
-SGPROJECT_OHIO = 'SGProject_OH'
-SG_DESCR_OH = 'Security Group para o projeto envolvendo acesso ao DB do MySQL'
+SGPROJECT_OHIO = 'sg-0a6d8e0502f2e3dd9' # Criar um!!
 OH_NAME = 'InsanceOH'
 KEY_OH = 'project_key_oh'
 
 UBUNTU_20_NV = 'ami-083654bd07b5da81d' # Pesquisar um jeito!!
-SGPROJECT_NV = 'SGProject_NV'
-SG_DESCR_NV = 'Security Group para o projeto envolvendo acesso ao ORM'
+SGPROJECT_NV = 'sg-01dd7bfe7fa6950c6' # Criar um!!
 NV_NAME = 'InsanceNV'
 KEY_NV = 'project_key_nv'
 IMG_NAME = 'Django-AMI'
@@ -55,25 +53,11 @@ policies_client = nv_session.client('autoscaling-plans')
 # Remoção de recursos que serão criados
 print("Deletando configurações anteriores...")
 delet.instance_termination(ec2_resource_oh, OH_NAME)
-delet.key_termination(ec2_client_oh, KEY_OH)
-delet.security_group_termination(ec2_client_oh, SGPROJECT_OHIO)
-
 delet.instance_termination(ec2_resource_nv, NV_NAME)
-delet.key_termination(ec2_client_nv, KEY_NV)
-delet.security_group_termination(ec2_client_nv, SGPROJECT_NV)
-
 delet.image_termination(ec2_resource_nv, IMG_NAME)
 delet.load_balancer_termination(elb_client, LB_NAME)
 delet.autoscaling_termination(ec2_client_nv, scaling_client, LT_NAME, AS_NAME)
 print("Configurações deletadas com sucesso\n")
-
-
-# Criação das Keys e Security Groups
-creat.key_creation(ec2_client_oh, KEY_OH)
-creat.security_group_creation(ec2_client_oh, SGPROJECT_OHIO, SG_DESCR_OH)
-
-pkey_nv = creat.key_creation(ec2_client_nv, KEY_NV)
-creat.security_group_creation(ec2_client_nv, SGPROJECT_NV, SG_DESCR_NV)
 
 
 # Criação das instâncias
@@ -101,12 +85,12 @@ nv_instance = creat.instance_creation(ec2_resource_nv, UBUNTU_20_NV, USERDATA_NV
 print(f"Aguardando instância {nv_instance.instance_id} ficar disponível...")
 nv_instance.wait_until_running()
 
-check.ssh_connection(nv_instance, pkey_nv['KeyMaterial'])
-# img = creat.image_creation(nv_instance, ec2_resource_nv, IMG_NAME)
+check.ssh_connection(nv_instance, KEY_LOCAL,)
+img = creat.image_creation(nv_instance, ec2_resource_nv, IMG_NAME)
 
 
-# # Criação do LoadBalancer + Autoscaling
-# print("Criando Load Balancer...")
-# load_balancer = creat.load_balancer_creation(elb_client, LB_NAME, TG_NAME, [SGPROJECT_NV])
-# print("Criando Auto Scaling...")
-# creat.autoscaling_creation(ec2_client_nv, scaling_client, LT_NAME, AS_NAME, img.image_id, KEY_NV, load_balancer[1], [SGPROJECT_NV])
+# Criação do LoadBalancer + Autoscaling
+print("Criando Load Balancer...")
+load_balancer = creat.load_balancer_creation(elb_client, LB_NAME, TG_NAME, [SGPROJECT_NV])
+print("Criando Auto Scaling...")
+creat.autoscaling_creation(ec2_client_nv, scaling_client, LT_NAME, AS_NAME, img.image_id, KEY_NV, load_balancer[1], [SGPROJECT_NV])
