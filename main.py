@@ -8,12 +8,12 @@ import check
 
 # Variáveis fixas
 UBUNTU_20_OHIO = 'ami-0629230e074c580f2' # Pesquisar um jeito!!
-SGPROJECT_OHIO = 'sg-0a6d8e0502f2e3dd9' # Criar um!!
+SGPROJECT_OHIO = 'sg-08495e67bed196485' # Criar um!!
 OH_NAME = 'InsanceOH'
 KEY_OH = 'project_key_oh'
 
 UBUNTU_20_NV = 'ami-083654bd07b5da81d' # Pesquisar um jeito!!
-SGPROJECT_NV = 'sg-01dd7bfe7fa6950c6' # Criar um!!
+SGPROJECT_NV = 'sg-06625ca265a22b364' # Criar um!!
 NV_NAME = 'InsanceNV'
 KEY_NV = 'project_key_nv'
 IMG_NAME = 'Django-AMI'
