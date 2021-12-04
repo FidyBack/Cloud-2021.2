@@ -133,3 +133,16 @@ def autoscaling_creation(client, as_client, lt_name, as_name, image_id, key, tg_
     print(f"\tLaunch Template: {template_id}\n\tAuto Scaling: {auto_scaling_desc['AutoScalingGroups'][0]['AutoScalingGroupARN']}")
 
     return auto_scaling
+
+
+def key_creation(client, key_name):
+    print(f"Criando key {key_name}")
+    return client.create_key_pair(KeyName=key_name)
+
+
+def security_group_creation(client, sg_name, description):
+    print(f"Criando security group {sg_name}")
+    return client.create_security_group(
+        Description=description,
+        GroupName=sg_name
+    )
