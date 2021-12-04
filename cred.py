@@ -1,2 +1,2 @@
 SENHA = 'cloudx'
-KEY_LOCAL = "/home/project_key_nv.pem"
+KEY_LOCAL = "/project_key_nv.pem"
